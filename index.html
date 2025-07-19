@@ -89,10 +89,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             position: relative;
             overflow: hidden;
+            padding-top: 80px;
         }
 
         .hero::before {
@@ -115,17 +115,38 @@
             position: relative;
             z-index: 2;
             color: white;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+        }
+
+        .hero-visual {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1rem;
             opacity: 0;
             animation: fadeInUp 1s ease 0.5s forwards;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             margin-bottom: 2rem;
             opacity: 0;
             animation: fadeInUp 1s ease 0.7s forwards;
@@ -133,7 +154,7 @@
 
         .contact-info {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 1.5rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
@@ -143,6 +164,10 @@
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .contact-info a:hover {
@@ -152,22 +177,24 @@
 
         .cert-logos {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
+            justify-content: flex-start;
+            gap: 1rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
 
         .cert-logo {
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
             background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            overflow: hidden;
+            padding: 5px;
         }
 
         .cert-logo:hover {
@@ -175,9 +202,87 @@
         }
 
         .cert-logo img {
-            width: 60%;
-            height: 60%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
+            filter: grayscale(100%) contrast(0) brightness(1.5);
+        }
+
+        .data-visualization {
+            width: 100%;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .chart-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .grid-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .horizontal-line {
+            width: 100%;
+            height: 1px;
+            left: 0;
+        }
+
+        .vertical-line {
+            width: 1px;
+            height: 100%;
+            top: 0;
+        }
+
+        .chart-content {
+            position: absolute;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            left: 20px;
+            bottom: 20px;
+        }
+
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px 5px 0 0;
+            animation: grow 1.5s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        .trend-line {
+            position: absolute;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            transform-origin: left;
+            animation: drawTrend 2s ease-out forwards;
+        }
+
+        @keyframes grow {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        @keyframes drawTrend {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
         }
 
         .cta-button {
@@ -192,6 +297,8 @@
             opacity: 0;
             animation: fadeInUp 1s ease 0.9s forwards;
             backdrop-filter: blur(10px);
+            display: inline-block;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .cta-button:hover {
@@ -242,7 +349,6 @@
             border-radius: 2px;
         }
 
-        /* About Section */
         .about {
             background: white;
         }
@@ -286,7 +392,6 @@
             color: #667eea;
         }
 
-        /* Projects Section */
         .projects {
             background: #f8f9fa;
         }
@@ -462,7 +567,6 @@
             visibility: visible;
         }
 
-        /* Experience Section */
         .experience {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
@@ -583,75 +687,53 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Certificates Section */
         .certificates {
             background: #f8f9fa;
         }
 
-        .certificates-container {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .certificates-slider {
-            display: flex;
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 2rem 0;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
-        }
-
-        .certificates-slider::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            margin-top: 2rem;
         }
 
         .certificate-card {
-            scroll-snap-align: start;
-            flex: 0 0 300px;
             background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
-            text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        .certificate-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
         }
 
         .certificate-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .certificate-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
+        .certificate-image {
+            height: 160px;
+            background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            color: white;
-            font-size: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .certificate-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .certificate-content {
+            padding: 1.5rem;
         }
 
         .certificate-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: #333;
@@ -661,56 +743,67 @@
             color: #667eea;
             font-weight: 500;
             margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .certificate-date {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
-        .slider-nav {
-            position: absolute;
-            top: 50%;
+        .certificate-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        .slider-btn {
-            background: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            pointer-events: auto;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 10;
         }
 
-        .slider-btn:hover {
-            transform: scale(1.1);
+        .certificate-modal.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .slider-btn.prev {
-            transform: translateX(-20px);
+        .certificate-modal-content {
+            background: white;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .slider-btn.next {
-            transform: translateX(20px);
+        .certificate-modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
         }
 
-        .slider-btn:hover {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+        .close-certificate {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
             color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Education Section */
         .education {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
         }
@@ -779,14 +872,37 @@
             display: inline-block;
         }
 
-        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding-top: 70px;
+                padding-bottom: 50px;
             }
 
-            .hero p {
-                font-size: 1.1rem;
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .hero-text, .hero-visual {
+                text-align: center;
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .hero h1 {
+                margin-top: 1rem;
+            }
+
+            .contact-info, .cert-logos {
+                justify-content: center;
+            }
+
+            .data-visualization {
+                height: 250px;
+                margin-top: 2rem;
             }
 
             .nav-links {
@@ -829,21 +945,26 @@
                 grid-template-columns: 1fr;
             }
 
-            .slider-btn {
-                width: 40px;
-                height: 40px;
-            }
-
-            .slider-btn.prev {
-                transform: translateX(-10px);
-            }
-
-            .slider-btn.next {
-                transform: translateX(10px);
+            .certificates-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
         }
 
-        /* Scroll animations */
+        @media (max-width: 480px) {
+            .cert-logo {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .contact-info a {
+                font-size: 0.8rem;
+            }
+            
+            .data-visualization {
+                height: 200px;
+            }
+        }
+
         .scroll-reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -855,7 +976,6 @@
             transform: translateY(0);
         }
 
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -891,32 +1011,55 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Hamza Saleh</h1>
-            <p>Data Analyst | Business Intelligence Specialist</p>
-            
-            <div class="contact-info">
-                <a href="tel:+962780782494"><i class="fas fa-phone"></i> +962780782494</a>
-                <a href="mailto:hamza1tt1@gmail.com"><i class="fas fa-envelope"></i> hamza1tt1@gmail.com</a>
-                <a href="https://linkedin.com/hamzasaleh1" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/hamzasaleh1</a>
-                <a href="https://github.com/hamzasaleh1" target="_blank"><i class="fab fa-github"></i> github.com/hamzasaleh1</a>
+            <div class="hero-text">
+                <h1>Hamza Saleh</h1>
+                <p>Data Analyst | Business Intelligence Specialist</p>
+                
+                <div class="contact-info">
+                    <a href="tel:+962780782494"><i class="fas fa-phone"></i> +962780782494</a>
+                    <a href="mailto:hamza1tt1@gmail.com"><i class="fas fa-envelope"></i> hamza1tt1@gmail.com</a>
+                    <a href="https://linkedin.com/hamzasaleh1" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/hamzasaleh1</a>
+                    <a href="https://github.com/hamzasaleh1" target="_blank"><i class="fab fa-github"></i> github.com/hamzasaleh1</a>
+                </div>
+                
+                <div class="cert-logos">
+                    <div class="cert-logo">
+                        <img src="i1 (2).png" alt="DataCamp">
+                    </div>
+                    <div class="cert-logo">
+                        <img src="i1 (1).png" alt="Google">
+                    </div>
+                    <div class="cert-logo">
+                        <img src="i1 (3).png" alt="Correlation One">
+                    </div>
+                    <div class="cert-logo">
+                        <img src="i1 (4).png" alt="Microsoft">
+                    </div>
+                    <div class="cert-logo">
+                        <img src="i1 (1).jpg" alt="Certificate">
+                    </div>
+                    <div class="cert-logo">
+                        <img src="i2.png" alt="Certificate">
+                    </div>
+                    <div class="cert-logo">
+                        <img src="i3.jpg" alt="Certificate">
+                    </div>
+                    <div class="cert-logo">
+                        <img src="i4.jpg" alt="Certificate">
+                    </div>
+                </div>
+                
+                <a href="#projects" class="cta-button">View My Projects</a>
             </div>
             
-            <div class="cert-logos">
-                <div class="cert-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft">
-                </div>
-                <div class="cert-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png" alt="Google">
-                </div>
-                <div class="cert-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Datacamp_logo.png/1200px-Datacamp_logo.png" alt="DataCamp">
-                </div>
-                <div class="cert-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Correlation_One_logo.png/1200px-Correlation_One_logo.png" alt="Correlation One">
+            <div class="hero-visual">
+                <div class="data-visualization">
+                    <div class="chart-container">
+                        <div class="chart-grid" id="chartGrid"></div>
+                        <div class="chart-content" id="chartContent"></div>
+                    </div>
                 </div>
             </div>
-            
-            <a href="#projects" class="cta-button">View My Projects</a>
         </div>
     </section>
 
@@ -941,7 +1084,6 @@
                     </div>
                 </div>
                 <div class="about-image scroll-reveal">
-                    <!-- You can add a professional photo here -->
                     <div style="background: #f0f0f0; height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-user-tie" style="font-size: 5rem; color: #667eea;"></i>
                     </div>
@@ -1065,61 +1207,93 @@
     <section class="section certificates" id="certificates">
         <div class="container">
             <h2 class="section-title scroll-reveal">Certificates</h2>
-            <div class="certificates-container">
-                <div class="certificates-slider" id="certificatesSlider">
-                    <div class="certificate-card scroll-reveal" data-cert="pl300">
-                        <div class="certificate-icon"><i class="fab fa-microsoft"></i></div>
+            <div class="certificates-grid">
+                <div class="certificate-card" data-cert="pl300">
+                    <div class="certificate-image">
+                        <img src="i1 (4).png" alt="Microsoft PL-300">
+                    </div>
+                    <div class="certificate-content">
                         <h3 class="certificate-title">Microsoft Power BI Data Analyst Associate (PL-300)</h3>
                         <p class="certificate-issuer">Microsoft</p>
                         <p class="certificate-date">2024</p>
                     </div>
+                </div>
 
-                    <div class="certificate-card scroll-reveal" data-cert="google">
-                        <div class="certificate-icon"><i class="fab fa-google"></i></div>
+                <div class="certificate-card" data-cert="google">
+                    <div class="certificate-image">
+                        <img src="i1 (1).png" alt="Google Data Analytics">
+                    </div>
+                    <div class="certificate-content">
                         <h3 class="certificate-title">Google Data Analytics Professional Certificate</h3>
                         <p class="certificate-issuer">Google</p>
                         <p class="certificate-date">2024</p>
                     </div>
+                </div>
 
-                    <div class="certificate-card scroll-reveal" data-cert="datacamp">
-                        <div class="certificate-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="certificate-card" data-cert="datacamp">
+                    <div class="certificate-image">
+                        <img src="i1 (2).png" alt="DataCamp Power BI">
+                    </div>
+                    <div class="certificate-content">
                         <h3 class="certificate-title">DataCamp Data Analyst in Power BI</h3>
                         <p class="certificate-issuer">DataCamp</p>
                         <p class="certificate-date">2024</p>
                     </div>
+                </div>
 
-                    <div class="certificate-card scroll-reveal" data-cert="correlation">
-                        <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+                <div class="certificate-card" data-cert="correlation">
+                    <div class="certificate-image">
+                        <img src="i1 (3).png" alt="Correlation One">
+                    </div>
+                    <div class="certificate-content">
                         <h3 class="certificate-title">Correlation One Advanced Data Analytics</h3>
                         <p class="certificate-issuer">Correlation One</p>
                         <p class="certificate-date">2024 (Honor Certificate)</p>
                     </div>
+                </div>
 
-                    <div class="certificate-card scroll-reveal" data-cert="cbap">
-                        <div class="certificate-icon"><i class="fas fa-briefcase"></i></div>
+                <div class="certificate-card" data-cert="cbap">
+                    <div class="certificate-image">
+                        <img src="i1 (1).jpg" alt="CBAP">
+                    </div>
+                    <div class="certificate-content">
                         <h3 class="certificate-title">CBAP® Specialization - Business Analysis Professional™</h3>
                         <p class="certificate-issuer">International Institute of Business Analysis</p>
                         <p class="certificate-date">2024</p>
                     </div>
+                </div>
 
-                    <div class="certificate-card scroll-reveal" data-cert="sql">
-                        <div class="certificate-icon"><i class="fas fa-database"></i></div>
+                <div class="certificate-card" data-cert="sql">
+                    <div class="certificate-image">
+                        <img src="i2.png" alt="SQL for Data Science">
+                    </div>
+                    <div class="certificate-content">
                         <h3 class="certificate-title">SQL for Data Science</h3>
                         <p class="certificate-issuer">University of California, Davis</p>
                         <p class="certificate-date">2023</p>
                     </div>
+                </div>
 
-                    <div class="certificate-card scroll-reveal" data-cert="python">
-                        <div class="certificate-icon"><i class="fab fa-python"></i></div>
+                <div class="certificate-card" data-cert="python">
+                    <div class="certificate-image">
+                        <img src="i3.jpg" alt="Python for Data Analysis">
+                    </div>
+                    <div class="certificate-content">
                         <h3 class="certificate-title">Python for Data Analysis</h3>
                         <p class="certificate-issuer">University of Michigan</p>
                         <p class="certificate-date">2023</p>
                     </div>
                 </div>
-                
-                <div class="slider-nav">
-                    <button class="slider-btn prev" id="prevCert"><i class="fas fa-chevron-left"></i></button>
-                    <button class="slider-btn next" id="nextCert"><i class="fas fa-chevron-right"></i></button>
+
+                <div class="certificate-card" data-cert="excel">
+                    <div class="certificate-image">
+                        <img src="i4.jpg" alt="Advanced Excel">
+                    </div>
+                    <div class="certificate-content">
+                        <h3 class="certificate-title">Advanced Excel for Data Analysis</h3>
+                        <p class="certificate-issuer">Microsoft</p>
+                        <p class="certificate-date">2023</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1139,7 +1313,6 @@
         </div>
     </section>
 
-    <!-- Project Preview Modal -->
     <div class="overlay" id="overlay"></div>
     <div class="project-preview" id="projectPreview">
         <div class="preview-header">
@@ -1147,12 +1320,15 @@
             <button class="close-preview" id="closePreview">×</button>
         </div>
         <div class="preview-content">
-            <div class="preview-details" id="previewDetails">
-                <!-- Dynamic content will be loaded here -->
-            </div>
-            <div class="preview-visual" id="previewVisual">
-                <!-- Project visual will be loaded here -->
-            </div>
+            <div class="preview-details" id="previewDetails"></div>
+            <div class="preview-visual" id="previewVisual"></div>
+        </div>
+    </div>
+
+    <div class="certificate-modal" id="certificateModal">
+        <div class="certificate-modal-content">
+            <button class="close-certificate" id="closeCertificate">×</button>
+            <img src="" alt="Certificate" class="certificate-modal-img" id="certificateModalImg">
         </div>
     </div>
 
@@ -1166,6 +1342,61 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Create chart grid lines
+        const chartGrid = document.getElementById('chartGrid');
+        const chartContent = document.getElementById('chartContent');
+        
+        // Create horizontal grid lines
+        for (let i = 0; i <= 5; i++) {
+            const line = document.createElement('div');
+            line.className = 'grid-line horizontal-line';
+            line.style.top = `${i * 20}%`;
+            chartGrid.appendChild(line);
+            
+            // Add Y-axis labels
+            const label = document.createElement('div');
+            label.className = 'grid-label';
+            label.style.position = 'absolute';
+            label.style.left = '-30px';
+            label.style.top = `${i * 20}%`;
+            label.style.transform = 'translateY(-50%)';
+            label.style.color = 'rgba(255,255,255,0.7)';
+            label.style.fontSize = '12px';
+            label.textContent = `${100 - i * 20}`;
+            chartGrid.appendChild(label);
+        }
+        
+        // Create vertical grid lines
+        for (let i = 0; i <= 8; i++) {
+            const line = document.createElement('div');
+            line.className = 'grid-line vertical-line';
+            line.style.left = `${i * (100/8)}%`;
+            chartGrid.appendChild(line);
+        }
+
+        // Create animated chart bars
+        const barHeights = [70, 50, 80, 60, 90, 40, 75, 55];
+        const barPositions = [10, 20, 30, 40, 50, 60, 70, 80];
+        
+        barHeights.forEach((height, index) => {
+            const bar = document.createElement('div');
+            bar.className = 'chart-bar';
+            bar.style.left = `${barPositions[index]}%`;
+            bar.style.height = `${height}%`;
+            bar.style.animationDelay = `${index * 0.1}s`;
+            chartContent.appendChild(bar);
+        });
+        
+        // Create trend line
+        const trendLine = document.createElement('div');
+        trendLine.className = 'trend-line';
+        trendLine.style.left = '10%';
+        trendLine.style.top = '30%';
+        trendLine.style.width = '70%';
+        trendLine.style.transform = 'rotate(-5deg)';
+        trendLine.style.transformOrigin = 'left center';
+        chartContent.appendChild(trendLine);
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1239,7 +1470,7 @@
                         <li>Returns peaked at 42.59% for credit card users</li>
                     </ul>
                 `,
-                visual: '<iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjU5YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0" frameborder="0" allowFullScreen="true"></iframe>'
+                visual: '<iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjU5YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0" frameborder="0" allowFullScreen="true"></iframe>'
             },
             superstore: {
                 title: 'Superstore Sales & Profitability Analysis',
@@ -1270,7 +1501,7 @@
                         <li>Estimated CLTV by segment and region</li>
                     </ul>
                 `,
-                visual: '<iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjU5YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0" frameborder="0" allowFullScreen="true"></iframe>'
+                visual: '<iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjU5YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0" frameborder="0" allowFullScreen="true"></iframe>'
             },
             electronics: {
                 title: 'Electronic Market Sales Analysis',
@@ -1330,31 +1561,31 @@
         closePreview.addEventListener('click', closeProjectPreview);
         overlay.addEventListener('click', closeProjectPreview);
 
-        // Certificate slider functionality
-        const certSlider = document.getElementById('certificatesSlider');
-        const prevBtn = document.getElementById('prevCert');
-        const nextBtn = document.getElementById('nextCert');
+        // Certificate modal functionality
+        const certificateCards = document.querySelectorAll('.certificate-card');
+        const certificateModal = document.getElementById('certificateModal');
+        const closeCertificate = document.getElementById('closeCertificate');
+        const certificateModalImg = document.getElementById('certificateModalImg');
 
-        prevBtn.addEventListener('click', () => {
-            certSlider.scrollBy({ left: -300, behavior: 'smooth' });
-        });
-
-        nextBtn.addEventListener('click', () => {
-            certSlider.scrollBy({ left: 300, behavior: 'smooth' });
-        });
-
-        // Enhanced scroll animations for timeline
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const timelineObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
+        certificateCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imgSrc = card.querySelector('img').src;
+                certificateModalImg.src = imgSrc;
+                certificateModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
-        }, { threshold: 0.2 });
+        });
 
-        timelineItems.forEach(item => {
-            timelineObserver.observe(item);
+        function closeCertificateModal() {
+            certificateModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeCertificate.addEventListener('click', closeCertificateModal);
+        certificateModal.addEventListener('click', (e) => {
+            if (e.target === certificateModal) {
+                closeCertificateModal();
+            }
         });
 
         // Add typing effect to hero text
@@ -1402,16 +1633,15 @@
             });
         });
 
-        // Add floating animation to certificates
-        const certificateIcons = document.querySelectorAll('.certificate-icon');
-        certificateIcons.forEach((icon, index) => {
-            icon.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
-        });
-
         // Add keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && projectPreview.classList.contains('active')) {
-                closeProjectPreview();
+            if (e.key === 'Escape') {
+                if (projectPreview.classList.contains('active')) {
+                    closeProjectPreview();
+                }
+                if (certificateModal.classList.contains('active')) {
+                    closeCertificateModal();
+                }
             }
         });
 
@@ -1447,137 +1677,5 @@
             progressBar.style.width = scrollPercent + '%';
         });
     </script>
-
-    <style>
-        /* Additional styles for enhanced features */
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #667eea;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            opacity: 0;
-        }
-
-        .custom-cursor.active {
-            opacity: 1;
-        }
-
-        .page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
-        }
-
-        .loader {
-            text-align: center;
-            color: white;
-        }
-
-        .loader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            z-index: 1001;
-            transition: width 0.1s ease;
-        }
-
-        /* Enhanced project card hover effects */
-        .project-card {
-            transform-style: preserve-3d;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Enhanced certificate animations */
-        .certificate-card:hover .certificate-icon {
-            animation: bounce 0.6s ease;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        /* Enhanced timeline animations */
-        .timeline-item {
-            animation: slideIn 0.8s ease forwards;
-            animation-play-state: paused;
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            .custom-cursor {
-                display: none;
-            }
-            
-            .project-card {
-                transform: none !important;
-            }
-            
-            .project-card:hover {
-                transform: translateY(-5px) !important;
-            }
-        }
-
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* High contrast mode */
-        @media (prefers-contrast: high) {
-            .project-card,
-            .certificate-card,
-            .education-card,
-            .timeline-content {
-                border: 2px solid #000;
-            }
-        }
-    </style>
 </body>
 </html>
