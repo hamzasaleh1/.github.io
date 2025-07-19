@@ -84,6 +84,15 @@
             width: 100%;
         }
 
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         .hero {
             height: 100vh;
             display: flex;
@@ -260,7 +269,7 @@
         .chart-bar {
             position: absolute;
             bottom: 0;
-            width: 30px;
+            width: 20px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 5px 5px 0 0;
             animation: grow 1.5s ease-out forwards;
@@ -872,6 +881,146 @@
             display: inline-block;
         }
 
+        /* Skills Section */
+        .skills {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* CV Modal */
+        .cv-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cv-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cv-modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            height: 90%;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cv-modal-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cv {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cv-modal-body {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .cv-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-menu-links li {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-menu-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .hero {
                 height: auto;
@@ -907,6 +1056,10 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
             }
 
             .about-grid {
@@ -948,6 +1101,11 @@
             .certificates-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
+
+            /* Adjust chart bars for mobile */
+            .chart-bar {
+                width: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -962,6 +1120,10 @@
             
             .data-visualization {
                 height: 200px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
         }
 
@@ -1001,13 +1163,31 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#certificates">Certificates</a></li>
                 <li><a href="#education">Education</a></li>
+                <li><a href="#" id="showCV">CV</a></li>
             </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#" id="showCVMobile">CV</a></li>
+        </ul>
+    </div>
 
     <section class="hero" id="home">
         <div class="hero-content">
@@ -1087,6 +1267,62 @@
                     <div style="background: #f0f0f0; height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-user-tie" style="font-size: 5rem; color: #667eea;"></i>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section skills" id="skills">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="skill-name">Power BI</h3>
+                </div>
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="skill-name">Tableau</h3>
+                </div>
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="skill-name">Python</h3>
+                </div>
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="skill-name">SQL</h3>
+                </div>
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3 class="skill-name">Excel</h3>
+                </div>
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="skill-name">Alteryx</h3>
+                </div>
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fab fa-r-project"></i>
+                    </div>
+                    <h3 class="skill-name">R</h3>
+                </div>
+                <div class="skill-card scroll-reveal">
+                    <div class="skill-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="skill-name">Looker</h3>
                 </div>
             </div>
         </div>
@@ -1309,6 +1545,12 @@
                     <p class="edu-duration">2014 – 2018 | Amman, Jordan</p>
                     <span class="gpa">Grade: 3.1 (Very Good)</span>
                 </div>
+                <div class="education-card scroll-reveal">
+                    <h3 class="degree">Tawjihi (High School Diploma)</h3>
+                    <p class="institution">Scientific Stream</p>
+                    <p class="edu-duration">2013 – 2014 | Amman, Jordan</p>
+                    <span class="gpa">Grade: 92/100 (Excellent)</span>
+                </div>
             </div>
         </div>
     </section>
@@ -1332,6 +1574,18 @@
         </div>
     </div>
 
+    <div class="cv-modal" id="cvModal">
+        <div class="cv-modal-content">
+            <div class="cv-modal-header">
+                <h3>My CV</h3>
+                <button class="close-cv" id="closeCV">×</button>
+            </div>
+            <div class="cv-modal-body">
+                <iframe class="cv-iframe" src="your-cv.pdf" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
@@ -1341,6 +1595,21 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
         });
 
         // Create chart grid lines
@@ -1375,7 +1644,7 @@
             chartGrid.appendChild(line);
         }
 
-        // Create animated chart bars
+        // Create animated chart bars - adjusted for mobile
         const barHeights = [70, 50, 80, 60, 90, 40, 75, 55];
         const barPositions = [10, 20, 30, 40, 50, 60, 70, 80];
         
@@ -1588,6 +1857,39 @@
             }
         });
 
+        // CV Modal functionality
+        const showCV = document.getElementById('showCV');
+        const showCVMobile = document.getElementById('showCVMobile');
+        const cvModal = document.getElementById('cvModal');
+        const closeCV = document.getElementById('closeCV');
+
+        function openCVModal() {
+            cvModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCVModal() {
+            cvModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        showCV.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCVModal();
+        });
+
+        showCVMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCVModal();
+        });
+
+        closeCV.addEventListener('click', closeCVModal);
+        cvModal.addEventListener('click', (e) => {
+            if (e.target === cvModal) {
+                closeCVModal();
+            }
+        });
+
         // Add typing effect to hero text
         function typeWriter(element, text, speed = 100) {
             let i = 0;
@@ -1641,6 +1943,9 @@
                 }
                 if (certificateModal.classList.contains('active')) {
                     closeCertificateModal();
+                }
+                if (cvModal.classList.contains('active')) {
+                    closeCVModal();
                 }
             }
         });
