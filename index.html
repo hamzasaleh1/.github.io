@@ -1,1986 +1,2010 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamza Saleh - Data Analyst Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow-x: hidden;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: #333;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-            padding: 1rem;
-        }
-
-        .hero-visual {
-            flex: 1;
-            min-width: 300px;
-            padding: 1rem;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.5s forwards;
-        }
-
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.7s forwards;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: flex-start;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-info a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-
-        .contact-info a:hover {
-            transform: translateY(-3px);
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .cert-logos {
-            display: flex;
-            justify-content: flex-start;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .cert-logo {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            overflow: hidden;
-            padding: 5px;
-        }
-
-        .cert-logo:hover {
-            transform: translateY(-5px) scale(1.1);
-        }
-
-        .cert-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: grayscale(100%) contrast(0) brightness(1.5);
-        }
-
-        .data-visualization {
-            width: 100%;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-        }
-
-        .chart-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        .chart-grid {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .grid-line {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .horizontal-line {
-            width: 100%;
-            height: 1px;
-            left: 0;
-        }
-
-        .vertical-line {
-            width: 1px;
-            height: 100%;
-            top: 0;
-        }
-
-        .chart-content {
-            position: absolute;
-            width: calc(100% - 40px);
-            height: calc(100% - 40px);
-            left: 20px;
-            bottom: 20px;
-        }
-
-        .chart-bar {
-            position: absolute;
-            bottom: 0;
-            width: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 5px 5px 0 0;
-            animation: grow 1.5s ease-out forwards;
-            transform-origin: bottom;
-        }
-
-        .trend-line {
-            position: absolute;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.8);
-            transform-origin: left;
-            animation: drawTrend 2s ease-out forwards;
-        }
-
-        @keyframes grow {
-            from { transform: scaleY(0); }
-            to { transform: scaleY(1); }
-        }
-
-        @keyframes drawTrend {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-        }
-
-        .cta-button {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 1rem 2rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.9s forwards;
-            backdrop-filter: blur(10px);
-            display: inline-block;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-
-        .cta-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section {
-            padding: 5rem 0;
-            position: relative;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            color: #333;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        .about {
-            background: white;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #666;
-        }
-
-        .skills-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .skill-item {
-            background: #f8f9fa;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-
-        .skill-item i {
-            margin-right: 0.5rem;
-            color: #667eea;
-        }
-
-        .projects {
-            background: #f8f9fa;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .project-image {
-            height: 200px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .project-desc {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .project-tech {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tech-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .project-preview {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 90%;
-            max-width: 1000px;
-            height: 90%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
-            z-index: 2000;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            opacity: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-preview.active {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-        }
-
-        .preview-header {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-preview {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-
-        .close-preview:hover {
-            opacity: 0.7;
-        }
-
-        .preview-content {
-            padding: 0;
-            height: 100%;
-            overflow-y: auto;
-            display: flex;
-        }
-
-        .preview-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .preview-details {
-            padding: 2rem;
-            width: 40%;
-            overflow-y: auto;
-        }
-
-        .preview-visual {
-            width: 60%;
-            height: 100%;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .preview-visual iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1500;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .experience {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin: 3rem 0;
-            opacity: 0;
-            animation: slideIn 0.8s ease forwards;
-        }
-
-        .timeline-item:nth-child(odd) {
-            animation-delay: 0.2s;
-        }
-
-        .timeline-item:nth-child(even) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .timeline-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            position: relative;
-            width: 45%;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            left: 55%;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            left: 0;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .timeline-icon {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .job-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .company {
-            color: #667eea;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .duration {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .job-desc {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .job-desc ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .job-desc li {
-            margin-bottom: 0.5rem;
-        }
-
-        .certificates {
-            background: #f8f9fa;
-        }
-
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .certificate-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .certificate-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .certificate-image {
-            height: 160px;
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid #eee;
-        }
-
-        .certificate-image img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
-        .certificate-content {
-            padding: 1.5rem;
-        }
-
-        .certificate-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .certificate-issuer {
-            color: #667eea;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .certificate-date {
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        .certificate-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 3000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .certificate-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .certificate-modal-content {
-            background: white;
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .certificate-modal-img {
-            max-width: 100%;
-            max-height: 80vh;
-            display: block;
-        }
-
-        .close-certificate {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .education {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-        }
-
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .education-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .education-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            transform: translate(50%, -50%);
-            opacity: 0.1;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .degree {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .institution {
-            color: #667eea;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .edu-duration {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .gpa {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        /* Skills Section */
-        .skills {
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-card {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .skill-name {
-            font-weight: 600;
-            color: #333;
-        }
-
-        /* CV Modal */
-        .cv-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 3000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .cv-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .cv-modal-content {
-            background: white;
-            width: 90%;
-            max-width: 800px;
-            height: 90%;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cv-modal-header {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-cv {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .cv-modal-body {
-            flex: 1;
-            overflow: hidden;
-        }
-
-        .cv-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            z-index: 999;
-            transform: translateY(-100%);
-            opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-        .mobile-menu.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .mobile-menu-links {
-            list-style: none;
-            padding: 1rem 0;
-        }
-
-        .mobile-menu-links li {
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .mobile-menu-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                height: auto;
-                min-height: 100vh;
-                padding-top: 70px;
-                padding-bottom: 50px;
-            }
-
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem;
-            }
-
-            .hero-text, .hero-visual {
-                text-align: center;
-                padding: 1rem;
-                width: 100%;
-            }
-
-            .hero h1 {
-                margin-top: 1rem;
-            }
-
-            .contact-info, .cert-logos {
-                justify-content: center;
-            }
-
-            .data-visualization {
-                height: 250px;
-                margin-top: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-content {
-                width: calc(100% - 60px);
-                left: 60px !important;
-            }
-
-            .timeline-icon {
-                left: 20px;
-            }
-
-            .project-preview {
-                width: 95%;
-                height: 90%;
-                flex-direction: column;
-            }
-
-            .preview-details, .preview-visual {
-                width: 100%;
-            }
-
-            .preview-visual {
-                height: 300px;
-            }
-
-            .projects-grid,
-            .education-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .certificates-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-
-            /* Adjust chart bars for mobile */
-            .chart-bar {
-                width: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cert-logo {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .contact-info a {
-                font-size: 0.8rem;
-            }
-            
-            .data-visualization {
-                height: 200px;
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-        }
-
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease;
-        }
-
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #5a6fd8, #6a4190);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamza Saleh - Data Analyst Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+line-height: 1.6;
+color: #333;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+overflow-x: hidden;
+}
+
+.navbar {
+position: fixed;
+top: 0;
+width: 100%;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(20px);
+z-index: 1000;
+padding: 1rem 0;
+transition: all 0.3s ease;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar.scrolled {
+background: rgba(255, 255, 255, 0.98);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 2rem;
+}
+
+.logo {
+font-size: 1.8rem;
+font-weight: 700;
+background: linear-gradient(45deg, #667eea, #764ba2);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.nav-links {
+display: flex;
+list-style: none;
+gap: 2rem;
+}
+
+.nav-links a {
+text-decoration: none;
+color: #333;
+font-weight: 500;
+transition: all 0.3s ease;
+position: relative;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 2px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+width: 100%;
+}
+
+.mobile-menu-btn {
+display: none;
+background: none;
+border: none;
+color: #333;
+font-size: 1.5rem;
+cursor: pointer;
+}
+
+.hero {
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+position: relative;
+overflow: hidden;
+padding-top: 80px;
+}
+
+.hero::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0px) rotate(0deg); }
+50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+.hero-content {
+position: relative;
+z-index: 2;
+color: white;
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 2rem;
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-between;
+}
+
+.hero-text {
+flex: 1;
+min-width: 300px;
+padding: 1rem;
+}
+
+.hero-visual {
+flex: 1;
+min-width: 300px;
+padding: 1rem;
+position: relative;
+}
+
+.hero h1 {
+font-size: clamp(2.5rem, 5vw, 4rem);
+margin-bottom: 1rem;
+opacity: 0;
+animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.hero p {
+font-size: clamp(1.1rem, 2vw, 1.3rem);
+margin-bottom: 2rem;
+opacity: 0;
+animation: fadeInUp 1s ease 0.7s forwards;
+}
+
+.hero-tagline {
+font-size: 1.1rem;
+margin-bottom: 1.5rem;
+opacity: 0;
+animation: fadeInUp 1s ease 0.8s forwards;
+font-style: italic;
+color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-info {
+display: flex;
+justify-content: flex-start;
+gap: 1.5rem;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+}
+
+.contact-info a {
+color: white;
+text-decoration: none;
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.contact-info a:hover {
+transform: translateY(-3px);
+text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cert-logos {
+display: flex;
+justify-content: flex-start;
+gap: 1rem;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+}
+
+.cert-logo {
+width: 50px;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.3s ease;
+overflow: hidden;
+}
+
+.cert-logo:hover {
+transform: translateY(-5px) scale(1.1);
+}
+
+.cert-logo img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+filter: none;
+}
+
+.data-visualization {
+width: 100%;
+height: 300px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 20px;
+backdrop-filter: blur(10px);
+position: relative;
+overflow: hidden;
+box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+padding: 20px;
+}
+
+.chart-container {
+width: 100%;
+height: 100%;
+position: relative;
+}
+
+.chart-grid {
+position: absolute;
+width: 100%;
+height: 100%;
+}
+
+.grid-line {
+position: absolute;
+background: rgba(255, 255, 255, 0.2);
+}
+
+.horizontal-line {
+width: 100%;
+height: 1px;
+left: 0;
+}
+
+.vertical-line {
+width: 1px;
+height: 100%;
+top: 0;
+}
+
+.chart-content {
+position: absolute;
+width: calc(100% - 40px);
+height: calc(100% - 40px);
+left: 20px;
+bottom: 20px;
+}
+
+.chart-bar {
+position: absolute;
+bottom: 0;
+width: 20px;
+background: rgba(255, 255, 255, 0.8);
+border-radius: 5px 5px 0 0;
+animation: grow 1.5s ease-out forwards;
+transform-origin: bottom;
+}
+
+.trend-line {
+position: absolute;
+height: 2px;
+background: rgba(255, 255, 255, 0.8);
+transform-origin: left;
+animation: drawTrend 2s ease-out forwards;
+}
+
+@keyframes grow {
+from { transform: scaleY(0); }
+to { transform: scaleY(1); }
+}
+
+@keyframes drawTrend {
+from { transform: scaleX(0); }
+to { transform: scaleX(1); }
+}
+
+.cta-button {
+background: rgba(255, 255, 255, 0.2);
+color: white;
+padding: 1rem 2rem;
+border: 2px solid rgba(255, 255, 255, 0.3);
+border-radius: 50px;
+text-decoration: none;
+font-weight: 600;
+transition: all 0.3s ease;
+opacity: 0;
+animation: fadeInUp 1s ease 0.9s forwards;
+backdrop-filter: blur(10px);
+display: inline-block;
+font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.cta-button:hover {
+background: rgba(255, 255, 255, 0.3);
+transform: translateY(-2px);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.project-button {
+background: linear-gradient(45deg, #667eea, #764ba2);
+color: white;
+padding: 0.5rem 1.5rem;
+border: none;
+border-radius: 5px;
+text-decoration: none;
+font-weight: 500;
+transition: all 0.3s ease;
+display: inline-block;
+margin-top: 1rem;
+font-size: 0.9rem;
+}
+
+.project-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.section {
+padding: 5rem 0;
+position: relative;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 2rem;
+}
+
+.section-title {
+text-align: center;
+font-size: 2.5rem;
+margin-bottom: 3rem;
+position: relative;
+color: #333;
+}
+
+.section-title::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 50%;
+transform: translateX(-50%);
+width: 80px;
+height: 3px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+border-radius: 2px;
+}
+
+.about {
+background: white;
+}
+
+.about-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 3rem;
+align-items: center;
+}
+
+.about-text h3 {
+font-size: 1.8rem;
+margin-bottom: 1.5rem;
+color: #333;
+}
+
+.about-text p {
+margin-bottom: 1rem;
+color: #666;
+}
+
+.skills-list {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 1rem;
+margin-top: 1.5rem;
+}
+
+.skill-item {
+background: #f8f9fa;
+padding: 0.8rem 1rem;
+border-radius: 8px;
+font-weight: 500;
+display: flex;
+align-items: center;
+}
+
+.skill-item i {
+margin-right: 0.5rem;
+color: #667eea;
+}
+
+.projects {
+background: #f8f9fa;
+}
+
+.projects-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.project-card {
+background: white;
+border-radius: 20px;
+overflow: hidden;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+cursor: pointer;
+position: relative;
+}
+
+.project-card:hover {
+transform: translateY(-10px) scale(1.02);
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+height: 200px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 1.2rem;
+font-weight: 600;
+position: relative;
+overflow: hidden;
+}
+
+.project-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.project-content {
+padding: 1.5rem;
+}
+
+.project-title {
+font-size: 1.3rem;
+font-weight: 600;
+margin-bottom: 0.5rem;
+color: #333;
+}
+
+.project-date {
+color: #667eea;
+font-weight: 500;
+margin-bottom: 0.5rem;
+font-size: 0.9rem;
+}
+
+.project-tech {
+display: flex;
+gap: 0.5rem;
+flex-wrap: wrap;
+margin-bottom: 1rem;
+}
+
+.tech-tag {
+background: linear-gradient(45deg, #667eea, #764ba2);
+color: white;
+padding: 0.3rem 0.8rem;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 500;
+}
+
+.project-preview {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) scale(0);
+width: 90%;
+max-width: 1000px;
+height: 90%;
+background: white;
+border-radius: 20px;
+box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
+z-index: 2000;
+overflow: hidden;
+transition: all 0.3s ease;
+opacity: 0;
+display: flex;
+flex-direction: column;
+}
+
+.project-preview.active {
+transform: translate(-50%, -50%) scale(1);
+opacity: 1;
+}
+
+.preview-header {
+background: linear-gradient(45deg, #667eea, #764ba2);
+color: white;
+padding: 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.close-preview {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+transition: opacity 0.3s ease;
+}
+
+.close-preview:hover {
+opacity: 0.7;
+}
+
+.preview-content {
+padding: 0;
+height: 100%;
+overflow-y: auto;
+}
+
+.preview-iframe {
+width: 100%;
+height: 100%;
+border: none;
+}
+
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+backdrop-filter: blur(5px);
+z-index: 1500;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+
+.overlay.active {
+opacity: 1;
+visibility: visible;
+}
+
+.experience {
+background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.timeline {
+position: relative;
+max-width: 800px;
+margin: 0 auto;
+}
+
+.timeline::before {
+content: '';
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+top: 0;
+bottom: 0;
+width: 3px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.timeline-item {
+position: relative;
+margin: 3rem 0;
+opacity: 0;
+animation: slideIn 0.8s ease forwards;
+}
+
+.timeline-item:nth-child(odd) {
+animation-delay: 0.2s;
+}
+
+.timeline-item:nth-child(even) {
+animation-delay: 0.4s;
+}
+
+@keyframes slideIn {
+from {
+opacity: 0;
+transform: translateY(50px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.timeline-content {
+background: white;
+padding: 2rem;
+border-radius: 20px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+position: relative;
+width: 45%;
+transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+left: 55%;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+left: 0;
+}
+
+.timeline-content:hover {
+transform: translateY(-5px);
+box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-icon {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+top: 20px;
+width: 60px;
+height: 60px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 1.5rem;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.job-title {
+font-size: 1.3rem;
+font-weight: 600;
+color: #333;
+margin-bottom: 0.5rem;
+}
+
+.company {
+color: #667eea;
+font-weight: 500;
+margin-bottom: 0.5rem;
+}
+
+.duration {
+color: #666;
+font-size: 0.9rem;
+margin-bottom: 1rem;
+}
+
+.job-desc {
+color: #666;
+line-height: 1.6;
+}
+
+.job-desc ul {
+margin-left: 1.5rem;
+margin-top: 0.5rem;
+}
+
+.job-desc li {
+margin-bottom: 0.5rem;
+}
+
+.certificates {
+background: #f8f9fa;
+}
+
+.certificates-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.certificate-card {
+background: white;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+cursor: pointer;
+position: relative;
+}
+
+.certificate-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.certificate-image {
+height: 160px;
+background: #f5f5f5;
+display: flex;
+align-items: center;
+justify-content: center;
+border-bottom: 1px solid #eee;
+}
+
+.certificate-image img {
+max-width: 90%;
+max-height: 90%;
+object-fit: contain;
+}
+
+.certificate-content {
+padding: 1.5rem;
+}
+
+.certificate-title {
+font-size: 1.1rem;
+font-weight: 600;
+margin-bottom: 0.5rem;
+color: #333;
+}
+
+.certificate-issuer {
+color: #667eea;
+font-weight: 500;
+margin-bottom: 0.5rem;
+font-size: 0.9rem;
+}
+
+.certificate-date {
+color: #666;
+font-size: 0.8rem;
+}
+
+.certificate-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.8);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 3000;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+
+.certificate-modal.active {
+opacity: 1;
+visibility: visible;
+}
+
+.certificate-modal-content {
+background: white;
+max-width: 90%;
+max-height: 90%;
+border-radius: 10px;
+overflow: hidden;
+position: relative;
+}
+
+.certificate-modal-img {
+max-width: 100%;
+max-height: 80vh;
+display: block;
+}
+
+.close-certificate {
+position: absolute;
+top: 10px;
+right: 10px;
+background: rgba(0, 0, 0, 0.7);
+color: white;
+border: none;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+font-size: 1.2rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.education {
+background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.education-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.education-card {
+background: white;
+border-radius: 20px;
+padding: 2rem;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+
+.education-card::before {
+content: '';
+position: absolute;
+top: 0;
+right: 0;
+width: 100px;
+height: 100px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+border-radius: 50%;
+transform: translate(50%, -50%);
+opacity: 0.1;
+}
+
+.education-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.degree {
+font-size: 1.3rem;
+font-weight: 600;
+color: #333;
+margin-bottom: 0.5rem;
+}
+
+.institution {
+color: #667eea;
+font-weight: 500;
+margin-bottom: 0.5rem;
+}
+
+.edu-duration {
+color: #666;
+font-size: 0.9rem;
+margin-bottom: 1rem;
+}
+
+.gpa {
+background: linear-gradient(45deg, #667eea, #764ba2);
+color: white;
+padding: 0.5rem 1rem;
+border-radius: 20px;
+font-size: 0.9rem;
+font-weight: 500;
+display: inline-block;
+}
+
+/* Skills Section */
+.skills {
+background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.skills-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.skill-card {
+background: white;
+border-radius: 15px;
+padding: 1.5rem;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+
+.skill-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.skill-icon {
+font-size: 2.5rem;
+margin-bottom: 1rem;
+}
+
+.skill-name {
+font-weight: 600;
+color: #333;
+margin-bottom: 0.5rem;
+}
+
+.skill-sub {
+font-size: 0.8rem;
+color: #666;
+line-height: 1.4;
+}
+
+/* CV Section */
+.cv-section {
+background: white;
+}
+
+.cv-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+
+.cv-buttons {
+display: flex;
+gap: 1rem;
+margin-top: 2rem;
+}
+
+.cv-button {
+background: linear-gradient(45deg, #667eea, #764ba2);
+color: white;
+padding: 1rem 2rem;
+border: none;
+border-radius: 5px;
+text-decoration: none;
+font-weight: 600;
+transition: all 0.3s ease;
+display: inline-block;
+}
+
+.cv-button:hover {
+transform: translateY(-3px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cv-button.secondary {
+background: white;
+color: #667eea;
+border: 2px solid #667eea;
+}
+
+/* CV Modal */
+.cv-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.8);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 3000;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+
+.cv-modal.active {
+opacity: 1;
+visibility: visible;
+}
+
+.cv-modal-content {
+background: white;
+width: 90%;
+max-width: 800px;
+height: 90%;
+border-radius: 10px;
+overflow: hidden;
+position: relative;
+display: flex;
+flex-direction: column;
+}
+
+.cv-modal-header {
+background: linear-gradient(45deg, #667eea, #764ba2);
+color: white;
+padding: 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.close-cv {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+}
+
+.cv-modal-body {
+flex: 1;
+overflow: hidden;
+}
+
+.cv-iframe {
+width: 100%;
+height: 100%;
+border: none;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+position: fixed;
+top: 80px;
+left: 0;
+width: 100%;
+background: white;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+z-index: 999;
+transform: translateY(-100%);
+opacity: 0;
+transition: all 0.3s ease;
+pointer-events: none;
+}
+
+.mobile-menu.active {
+transform: translateY(0);
+opacity: 1;
+pointer-events: all;
+}
+
+.mobile-menu-links {
+list-style: none;
+padding: 1rem 0;
+}
+
+.mobile-menu-links li {
+padding: 1rem 2rem;
+border-bottom: 1px solid #eee;
+}
+
+.mobile-menu-links a {
+text-decoration: none;
+color: #333;
+font-weight: 500;
+display: block;
+}
+
+@media (max-width: 768px) {
+.hero {
+height: auto;
+min-height: 100vh;
+padding-top: 70px;
+padding-bottom: 50px;
+}
+
+.hero-content {
+flex-direction: column;
+text-align: center;
+padding: 1rem;
+}
+
+.hero-text, .hero-visual {
+text-align: center;
+padding: 1rem;
+width: 100%;
+}
+
+.hero h1 {
+margin-top: 1rem;
+}
+
+.contact-info, .cert-logos {
+justify-content: center;
+}
+
+.data-visualization {
+height: 250px;
+margin-top: 2rem;
+}
+
+.nav-links {
+display: none;
+}
+
+.mobile-menu-btn {
+display: block;
+}
+
+.about-grid {
+grid-template-columns: 1fr;
+}
+
+.timeline::before {
+left: 20px;
+}
+
+.timeline-content {
+width: calc(100% - 60px);
+left: 60px !important;
+}
+
+.timeline-icon {
+left: 20px;
+}
+
+.project-preview {
+width: 95%;
+height: 90%;
+}
+
+.projects-grid,
+.education-grid {
+grid-template-columns: 1fr;
+}
+
+.certificates-grid {
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.skills-grid {
+grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.cv-buttons {
+flex-direction: column;
+width: 100%;
+}
+
+.cv-button {
+width: 100%;
+}
+
+/* Adjust chart bars for mobile */
+.chart-bar {
+width: 15px;
+}
+}
+
+@media (max-width: 480px) {
+.cert-logo {
+width: 40px;
+height: 40px;
+}
+
+.contact-info a {
+font-size: 0.8rem;
+}
+
+.data-visualization {
+height: 200px;
+}
+
+.skills-grid {
+grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+}
+
+.scroll-reveal {
+opacity: 0;
+transform: translateY(50px);
+transition: all 0.6s ease;
+}
+
+.scroll-reveal.revealed {
+opacity: 1;
+transform: translateY(0);
+}
+
+::-webkit-scrollbar {
+width: 8px;
+}
+
+::-webkit-scrollbar-track {
+background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+background: linear-gradient(45deg, #667eea, #764ba2);
+border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: linear-gradient(45deg, #5a6fd8, #6a4190);
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">Hamza Saleh</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#certificates">Certificates</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#" id="showCV">CV</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
+<nav class="navbar" id="navbar">
+<div class="nav-container">
+<div class="logo">Hamza Saleh</div>
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#certificates">Certificates</a></li>
+<li><a href="#education">Education</a></li>
+<li><a href="#cv">CV</a></li>
+</ul>
+<button class="mobile-menu-btn" id="mobileMenuBtn">
+<i class="fas fa-bars"></i>
+</button>
+</div>
+</nav>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-menu-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#certificates">Certificates</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#" id="showCVMobile">CV</a></li>
-        </ul>
-    </div>
+<div class="mobile-menu" id="mobileMenu">
+<ul class="mobile-menu-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#certificates">Certificates</a></li>
+<li><a href="#education">Education</a></li>
+<li><a href="#cv">CV</a></li>
+</ul>
+</div>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Hamza Saleh</h1>
-                <p>Data Analyst | Business Intelligence Specialist</p>
-                
-                <div class="contact-info">
-                    <a href="tel:+962780782494"><i class="fas fa-phone"></i> +962780782494</a>
-                    <a href="mailto:hamza1tt1@gmail.com"><i class="fas fa-envelope"></i> hamza1tt1@gmail.com</a>
-                    <a href="https://linkedin.com/hamzasaleh1" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/hamzasaleh1</a>
-                    <a href="https://github.com/hamzasaleh1" target="_blank"><i class="fab fa-github"></i> github.com/hamzasaleh1</a>
-                </div>
-                
-                <div class="cert-logos">
-                    <div class="cert-logo">
-                        <img src="i1 (2).png" alt="DataCamp">
-                    </div>
-                    <div class="cert-logo">
-                        <img src="i1 (1).png" alt="Google">
-                    </div>
-                    <div class="cert-logo">
-                        <img src="i1 (3).png" alt="Correlation One">
-                    </div>
-                    <div class="cert-logo">
-                        <img src="i1 (4).png" alt="Microsoft">
-                    </div>
-                    <div class="cert-logo">
-                        <img src="i1 (1).jpg" alt="Certificate">
-                    </div>
-                    <div class="cert-logo">
-                        <img src="i2.png" alt="Certificate">
-                    </div>
-                    <div class="cert-logo">
-                        <img src="i3.jpg" alt="Certificate">
-                    </div>
-                    <div class="cert-logo">
-                        <img src="i4.jpg" alt="Certificate">
-                    </div>
-                </div>
-                
-                <a href="#projects" class="cta-button">View My Projects</a>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="data-visualization">
-                    <div class="chart-container">
-                        <div class="chart-grid" id="chartGrid"></div>
-                        <div class="chart-content" id="chartContent"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="hero-text">
+<h1>Hamza Saleh</h1>
+<p>Data Analyst | Business Intelligence Specialist</p>
+<p class="hero-tagline">
+Microsoft PL-300 Certified Data Analyst | Google Data Analytics Professional |
+DataCamp Data Analyst Associate | CRP Data Officer
+</p>
 
-    <section class="section about" id="about">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">About Me</h2>
-            <div class="about-grid">
-                <div class="about-text scroll-reveal">
-                    <h3>Professional Summary</h3>
-                    <p>Data Analyst with hands-on expertise in SQL, Python, Power BI, Tableau, and Excel. Microsoft Power BI Data Analyst Associate (PL-300) certified. Proven experience in process optimization, quality control, and team leadership, driving up to 75% increases in productivity. Skilled in data analysis, trend identification, stakeholder communication, and KPI tracking. Experienced in implementing analytical techniques like RFM, CLV, ABC analysis, and A/B testing.</p>
-                    
-                    <h3>Key Skills</h3>
-                    <div class="skills-list">
-                        <div class="skill-item"><i class="fas fa-chart-line"></i> Power BI (Advanced DAX, Data Modeling)</div>
-                        <div class="skill-item"><i class="fas fa-chart-bar"></i> Tableau</div>
-                        <div class="skill-item"><i class="fab fa-python"></i> Python (Pandas, NumPy, Seaborn)</div>
-                        <div class="skill-item"><i class="fas fa-search"></i> Looker</div>
-                        <div class="skill-item"><i class="fas fa-file-excel"></i> Excel (Power Query, Pivoting)</div>
-                        <div class="skill-item"><i class="fas fa-project-diagram"></i> Alteryx</div>
-                        <div class="skill-item"><i class="fas fa-database"></i> SQL</div>
-                        <div class="skill-item"><i class="fab fa-r-project"></i> R (dplyr, ggplot2)</div>
-                    </div>
-                </div>
-                <div class="about-image scroll-reveal">
-                    <div style="background: #f0f0f0; height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-user-tie" style="font-size: 5rem; color: #667eea;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="contact-info">
+<a href="tel:+962780782494"><i class="fas fa-phone"></i> +962780782494</a>
+<a href="mailto:hamza1tt1@gmail.com"><i class="fas fa-envelope"></i> hamza1tt1@gmail.com</a>
+<a href="https://linkedin.com/hamzasaleh1" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/hamzasaleh1</a>
+<a href="https://github.com/hamzasaleh1" target="_blank"><i class="fab fa-github"></i> github.com/hamzasaleh1</a>
+</div>
 
-    <section class="section skills" id="skills">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="skill-name">Power BI</h3>
-                </div>
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h3 class="skill-name">Tableau</h3>
-                </div>
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fab fa-python"></i>
-                    </div>
-                    <h3 class="skill-name">Python</h3>
-                </div>
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3 class="skill-name">SQL</h3>
-                </div>
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-file-excel"></i>
-                    </div>
-                    <h3 class="skill-name">Excel</h3>
-                </div>
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3 class="skill-name">Alteryx</h3>
-                </div>
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fab fa-r-project"></i>
-                    </div>
-                    <h3 class="skill-name">R</h3>
-                </div>
-                <div class="skill-card scroll-reveal">
-                    <div class="skill-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 class="skill-name">Looker</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="cert-logos">
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/640px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft">
+</div>
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google.png/640px-Google.png" alt="Google">
+</div>
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Datacamp_logo.png/640px-Datacamp_logo.png" alt="DataCamp">
+</div>
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/International_Institute_of_Business_Analysis_logo.svg/1200px-International_Institute_of_Business_Analysis_logo.svg.png" alt="IIBA">
+</div>
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/University_of_California%2C_Davis_seal.svg/1200px-University_of_California%2C_Davis_seal.svg.png" alt="UC Davis">
+</div>
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/640px-Python.svg.png" alt="Python">
+</div>
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg/640px-Microsoft_Office_Excel_%282019%E2%80%93present%29.svg.png" alt="Excel">
+</div>
+<div class="cert-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Tableau_Software_Logo.png/640px-Tableau_Software_Logo.png" alt="Tableau">
+</div>
+</div>
 
-    <section class="section projects" id="projects">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card scroll-reveal" data-project="ecommerce">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="E-Commerce Analysis">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">E-Commerce Sales & Churn Analysis</h3>
-                        <p class="project-desc">Power BI dashboard with segmentation, sales, churn, returns, and insights pages using RFM analysis and time-series forecasting.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Power BI</span>
-                            <span class="tech-tag">Power Query</span>
-                            <span class="tech-tag">DAX</span>
-                            <span class="tech-tag">RFM Analysis</span>
-                        </div>
-                    </div>
-                </div>
+<a href="#projects" class="cta-button">View My Projects</a>
+</div>
 
-                <div class="project-card scroll-reveal" data-project="superstore">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Superstore Analysis">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Superstore Sales & Profitability Analysis</h3>
-                        <p class="project-desc">Analyzed profitability by category, discount impacts, customer segments, and shipping modes with CLTV estimation.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Power BI</span>
-                            <span class="tech-tag">Power Query</span>
-                            <span class="tech-tag">DAX</span>
-                            <span class="tech-tag">CLTV</span>
-                        </div>
-                    </div>
-                </div>
+<div class="hero-visual">
+<div class="data-visualization">
+<div class="chart-container">
+<div class="chart-grid" id="chartGrid"></div>
+<div class="chart-content" id="chartContent"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="project-card scroll-reveal" data-project="electronics">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Electronics Market Analysis">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Electronic Market Sales Analysis</h3>
-                        <p class="project-desc">Analyzed sales trends by month, city, and hour with Pandas, resolving missing values and date inconsistencies.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">NumPy</span>
-                            <span class="tech-tag">Matplotlib</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="section about" id="about">
+<div class="container">
+<h2 class="section-title scroll-reveal">About Me</h2>
+<div class="about-grid">
+<div class="about-text scroll-reveal">
+<h3>Professional Summary</h3>
+<p>Data Analyst with hands-on expertise in SQL, Python, Power BI, Tableau, and Excel. Microsoft Power BI Data Analyst Associate (PL-300) certified. Proven experience in process optimization, quality control, and team leadership, driving up to 75% increases in productivity. Skilled in data analysis, trend identification, stakeholder communication, and KPI tracking. Experienced in implementing analytical techniques like RFM, CLV, ABC analysis, and A/B testing.</p>
 
-    <section class="section experience" id="experience">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-icon">📊</div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">Data Officer</h3>
-                        <p class="company">Collateral Repair Project (CRP)</p>
-                        <p class="duration">May 2025 – Present | Amman, Jordan</p>
-                        <div class="job-desc">
-                            <ul>
-                                <li>Manage and maintain organizational datasets using MySQL / Python, ensuring data accuracy and consistency.</li>
-                                <li>Develop and implement an ERP system to integrate departments, CRM, and workflows.</li>
-                                <li>Developed interactive dashboards in Power BI to analyze beneficiary behavior and engagement patterns.</li>
-                                <li>Built and automated data collection workflows, including surveys and CRM pipelines.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<h3>Key Skills</h3>
+<div class="skills-list">
+<div class="skill-item"><i class="fas fa-chart-line"></i> Power BI (Advanced DAX, Data Modeling)</div>
+<div class="skill-item"><i class="fas fa-chart-bar"></i> Tableau</div>
+<div class="skill-item"><i class="fab fa-python"></i> Python (Pandas, NumPy, Seaborn)</div>
+<div class="skill-item"><i class="fas fa-search"></i> Looker</div>
+<div class="skill-item"><i class="fas fa-file-excel"></i> Excel (Power Query, Pivoting)</div>
+<div class="skill-item"><i class="fas fa-project-diagram"></i> Alteryx</div>
+<div class="skill-item"><i class="fas fa-database"></i> SQL</div>
+<div class="skill-item"><i class="fab fa-r-project"></i> R (dplyr, ggplot2)</div>
+</div>
+</div>
+<div class="about-image scroll-reveal">
+<div style="background: #f0f0f0; height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+<i class="fas fa-user-tie" style="font-size: 5rem; color: #667eea;"></i>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="timeline-item">
-                    <div class="timeline-icon">🔍</div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">Data Analyst Trainee</h3>
-                        <p class="company">Correlation One</p>
-                        <p class="duration">October 2024 – May 2025 | Remote</p>
-                        <div class="job-desc">
-                            <ul>
-                                <li>Completed intensive 17 week data analytics program, solving real world cases using Python, SQL, and Excel.</li>
-                                <li>Built SQL queries and Excel tools to clean data, resolving 100% of null value issues.</li>
-                                <li>Automated data processing workflows using Python, reducing manual preparation time by 40%.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<section class="section skills" id="skills">
+<div class="container">
+<h2 class="section-title scroll-reveal">Skills</h2>
+<div class="skills-grid">
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #F2C811;">
+<i class="fab fa-microsoft"></i>
+</div>
+<h3 class="skill-name">Power BI</h3>
+<p class="skill-sub">DAX, Power Query, Data Modeling, Visualization</p>
+</div>
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #5B17EE;">
+<i class="fas fa-chart-bar"></i>
+</div>
+<h3 class="skill-name">Tableau</h3>
+<p class="skill-sub">Dashboards, Calculated Fields, Storytelling</p>
+</div>
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #3776AB;">
+<i class="fab fa-python"></i>
+</div>
+<h3 class="skill-name">Python</h3>
+<p class="skill-sub">Pandas, NumPy, SciPy, Matplotlib, Seaborn</p>
+</div>
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #4479A1;">
+<i class="fas fa-database"></i>
+</div>
+<h3 class="skill-name">SQL</h3>
+<p class="skill-sub">MySQL, PostgreSQL, Query Optimization</p>
+</div>
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #217346;">
+<i class="fas fa-file-excel"></i>
+</div>
+<h3 class="skill-name">Excel</h3>
+<p class="skill-sub">Power Query, Pivot Tables, VBA, Advanced Formulas</p>
+</div>
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #00A3E0;">
+<i class="fas fa-project-diagram"></i>
+</div>
+<h3 class="skill-name">Alteryx</h3>
+<p class="skill-sub">Workflow Automation, Data Blending</p>
+</div>
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #276DC3;">
+<i class="fab fa-r-project"></i>
+</div>
+<h3 class="skill-name">R</h3>
+<p class="skill-sub">dplyr, ggplot2, tidyr, RMarkdown</p>
+</div>
+<div class="skill-card scroll-reveal">
+<div class="skill-icon" style="color: #5F6368;">
+<i class="fas fa-search"></i>
+</div>
+<h3 class="skill-name">Looker</h3>
+<p class="skill-sub">LookML, Explores, Dashboards</p>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="timeline-item">
-                    <div class="timeline-icon">💎</div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">Design & Operations Optimization Lead</h3>
-                        <p class="company">Ehssan Jewelry</p>
-                        <p class="duration">July 2019 – March 2025 | Amman, Jordan</p>
-                        <div class="job-desc">
-                            <ul>
-                                <li>Lead process optimization initiatives to improve efficiency, increasing productivity by 75%.</li>
-                                <li>Created KPI dashboards to enhance performance tracking and stakeholder communication.</li>
-                                <li>Conducted market research to stay updated on trends and improve designs.</li>
-                                <li>Built Excel tools and used BI platforms to develop automated apps that streamlined internal workflows.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="section projects" id="projects">
+<div class="container">
+<h2 class="section-title scroll-reveal">My Projects</h2>
+<div class="projects-grid">
+<!-- Car Accidents Project -->
+<div class="project-card scroll-reveal" data-project="accidents">
+<div class="project-image">
+<img src="https://images.unsplash.com/photo-1581093196278-1DF81f7f6d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Car Accidents Analysis">
+</div>
+<div class="project-content">
+<h3 class="project-title">Car Accidents of Addis Ababa City (2017-2020)</h3>
+<p class="project-date">February 2025</p>
+<div class="project-tech">
+<span class="tech-tag">Excel (Advanced)</span>
+<span class="tech-tag">Tableau</span>
+</div>
+<a href="#" class="project-button view-project">View Project</a>
+</div>
+</div>
 
-    <section class="section certificates" id="certificates">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">Certificates</h2>
-            <div class="certificates-grid">
-                <div class="certificate-card" data-cert="pl300">
-                    <div class="certificate-image">
-                        <img src="i1 (4).png" alt="Microsoft PL-300">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Microsoft Power BI Data Analyst Associate (PL-300)</h3>
-                        <p class="certificate-issuer">Microsoft</p>
-                        <p class="certificate-date">2024</p>
-                    </div>
-                </div>
+<!-- E-Commerce Project -->
+<div class="project-card scroll-reveal" data-project="ecommerce">
+<div class="project-image">
+<img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="E-Commerce Analysis">
+</div>
+<div class="project-content">
+<h3 class="project-title">E-Commerce Sales & Churn Analysis</h3>
+<p class="project-date">May 2025</p>
+<div class="project-tech">
+<span class="tech-tag">Power BI</span>
+<span class="tech-tag">Power Query</span>
+<span class="tech-tag">DAX</span>
+</div>
+<a href="#" class="project-button view-project">View Project</a>
+</div>
+</div>
 
-                <div class="certificate-card" data-cert="google">
-                    <div class="certificate-image">
-                        <img src="i1 (1).png" alt="Google Data Analytics">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Google Data Analytics Professional Certificate</h3>
-                        <p class="certificate-issuer">Google</p>
-                        <p class="certificate-date">2024</p>
-                    </div>
-                </div>
+<!-- Electronics Market Project -->
+<div class="project-card scroll-reveal" data-project="electronics">
+<div class="project-image">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Electronics Market Analysis">
+</div>
+<div class="project-content">
+<h3 class="project-title">Electronic Market Sales Analysis</h3>
+<p class="project-date">February 2025</p>
+<div class="project-tech">
+<span class="tech-tag">Python</span>
+<span class="tech-tag">Pandas</span>
+<span class="tech-tag">NumPy</span>
+<span class="tech-tag">Matplotlib</span>
+</div>
+<a href="#" class="project-button view-project">View Project</a>
+</div>
+</div>
 
-                <div class="certificate-card" data-cert="datacamp">
-                    <div class="certificate-image">
-                        <img src="i1 (2).png" alt="DataCamp Power BI">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">DataCamp Data Analyst in Power BI</h3>
-                        <p class="certificate-issuer">DataCamp</p>
-                        <p class="certificate-date">2024</p>
-                    </div>
-                </div>
+<!-- Superstore Project -->
+<div class="project-card scroll-reveal" data-project="superstore">
+<div class="project-image">
+<img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Superstore Analysis">
+</div>
+<div class="project-content">
+<h3 class="project-title">Superstore Sales & Profitability Analysis</h3>
+<p class="project-date">May 2025</p>
+<div class="project-tech">
+<span class="tech-tag">Power BI</span>
+<span class="tech-tag">Power Query</span>
+<span class="tech-tag">DAX</span>
+</div>
+<a href="#" class="project-button view-project">View Project</a>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="certificate-card" data-cert="correlation">
-                    <div class="certificate-image">
-                        <img src="i1 (3).png" alt="Correlation One">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Correlation One Advanced Data Analytics</h3>
-                        <p class="certificate-issuer">Correlation One</p>
-                        <p class="certificate-date">2024 (Honor Certificate)</p>
-                    </div>
-                </div>
+<section class="section experience" id="experience">
+<div class="container">
+<h2 class="section-title scroll-reveal">Experience</h2>
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-icon">📊</div>
+<div class="timeline-content">
+<h3 class="job-title">Data Officer</h3>
+<p class="company">Collateral Repair Project (CRP)</p>
+<p class="duration">May 2025 – Present | Amman, Jordan</p>
+<div class="job-desc">
+<ul>
+<li>Manage and maintain organizational datasets using MySQL / Python, ensuring data accuracy and consistency.</li>
+<li>Develop and implement an ERP system to integrate departments, CRM, and workflows.</li>
+<li>Developed interactive dashboards in Power BI to analyze beneficiary behavior and engagement patterns.</li>
+<li>Built and automated data collection workflows, including surveys and CRM pipelines.</li>
+</ul>
+</div>
+</div>
+</div>
 
-                <div class="certificate-card" data-cert="cbap">
-                    <div class="certificate-image">
-                        <img src="i1 (1).jpg" alt="CBAP">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">CBAP® Specialization - Business Analysis Professional™</h3>
-                        <p class="certificate-issuer">International Institute of Business Analysis</p>
-                        <p class="certificate-date">2024</p>
-                    </div>
-                </div>
+<div class="timeline-item">
+<div class="timeline-icon">🔍</div>
+<div class="timeline-content">
+<h3 class="job-title">Data Analyst Trainee</h3>
+<p class="company">Correlation One</p>
+<p class="duration">October 2024 – May 2025 | Remote</p>
+<div class="job-desc">
+<ul>
+<li>Completed intensive 17 week data analytics program, solving real world cases using Python, SQL, and Excel.</li>
+<li>Built SQL queries and Excel tools to clean data, resolving 100% of null value issues.</li>
+<li>Automated data processing workflows using Python, reducing manual preparation time by 40%.</li>
+</ul>
+</div>
+</div>
+</div>
 
-                <div class="certificate-card" data-cert="sql">
-                    <div class="certificate-image">
-                        <img src="i2.png" alt="SQL for Data Science">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">SQL for Data Science</h3>
-                        <p class="certificate-issuer">University of California, Davis</p>
-                        <p class="certificate-date">2023</p>
-                    </div>
-                </div>
+<div class="timeline-item">
+<div class="timeline-icon">💎</div>
+<div class="timeline-content">
+<h3 class="job-title">Design & Operations Optimization Lead</h3>
+<p class="company">Ehssan Jewelry</p>
+<p class="duration">July 2019 – March 2025 | Amman, Jordan</p>
+<div class="job-desc">
+<ul>
+<li>Lead process optimization initiatives to improve efficiency, increasing productivity by 75%.</li>
+<li>Created KPI dashboards to enhance performance tracking and stakeholder communication.</li>
+<li>Conducted market research to stay updated on trends and improve designs.</li>
+<li>Built Excel tools and used BI platforms to develop automated apps that streamlined internal workflows.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="certificate-card" data-cert="python">
-                    <div class="certificate-image">
-                        <img src="i3.jpg" alt="Python for Data Analysis">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Python for Data Analysis</h3>
-                        <p class="certificate-issuer">University of Michigan</p>
-                        <p class="certificate-date">2023</p>
-                    </div>
-                </div>
+<section class="section certificates" id="certificates">
+<div class="container">
+<h2 class="section-title scroll-reveal">Certificates</h2>
+<div class="certificates-grid">
+<div class="certificate-card" data-cert="pl300">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/640px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft PL-300">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">Microsoft Power BI Data Analyst Associate (PL-300)</h3>
+<p class="certificate-issuer">Microsoft</p>
+<p class="certificate-date">2024</p>
+</div>
+</div>
 
-                <div class="certificate-card" data-cert="excel">
-                    <div class="certificate-image">
-                        <img src="i4.jpg" alt="Advanced Excel">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Advanced Excel for Data Analysis</h3>
-                        <p class="certificate-issuer">Microsoft</p>
-                        <p class="certificate-date">2023</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="certificate-card" data-cert="google">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google.png/640px-Google.png" alt="Google Data Analytics">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">Google Data Analytics Professional Certificate</h3>
+<p class="certificate-issuer">Google</p>
+<p class="certificate-date">2024</p>
+</div>
+</div>
 
-    <section class="section education" id="education">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">Education</h2>
-            <div class="education-grid">
-                <div class="education-card scroll-reveal">
-                    <h3 class="degree">Bachelor's degree in Civil Engineering</h3>
-                    <p class="institution">Al-Balqa' Applied University / Faculty of engineering technology</p>
-                    <p class="edu-duration">2014 – 2018 | Amman, Jordan</p>
-                    <span class="gpa">Grade: 3.1 (Very Good)</span>
-                </div>
-                <div class="education-card scroll-reveal">
-                    <h3 class="degree">Tawjihi (High School Diploma)</h3>
-                    <p class="institution">Scientific Stream</p>
-                    <p class="edu-duration">2013 – 2014 | Amman, Jordan</p>
-                    <span class="gpa">Grade: 92/100 (Excellent)</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="certificate-card" data-cert="datacamp">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Datacamp_logo.png/640px-Datacamp_logo.png" alt="DataCamp Power BI">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">DataCamp Data Analyst in Power BI</h3>
+<p class="certificate-issuer">DataCamp</p>
+<p class="certificate-date">2024</p>
+</div>
+</div>
 
-    <div class="overlay" id="overlay"></div>
-    <div class="project-preview" id="projectPreview">
-        <div class="preview-header">
-            <h3 id="previewTitle">Project Preview</h3>
-            <button class="close-preview" id="closePreview">×</button>
-        </div>
-        <div class="preview-content">
-            <div class="preview-details" id="previewDetails"></div>
-            <div class="preview-visual" id="previewVisual"></div>
-        </div>
-    </div>
+<div class="certificate-card" data-cert="correlation">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/640px-Microsoft_logo_%282012%29.svg.png" alt="Correlation One">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">Correlation One Advanced Data Analytics</h3>
+<p class="certificate-issuer">Correlation One</p>
+<p class="certificate-date">2024 (Honor Certificate)</p>
+</div>
+</div>
 
-    <div class="certificate-modal" id="certificateModal">
-        <div class="certificate-modal-content">
-            <button class="close-certificate" id="closeCertificate">×</button>
-            <img src="" alt="Certificate" class="certificate-modal-img" id="certificateModalImg">
-        </div>
-    </div>
+<div class="certificate-card" data-cert="cbap">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/International_Institute_of_Business_Analysis_logo.svg/1200px-International_Institute_of_Business_Analysis_logo.svg.png" alt="CBAP">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">CBAP® Specialization - Business Analysis Professional™</h3>
+<p class="certificate-issuer">International Institute of Business Analysis</p>
+<p class="certificate-date">2024</p>
+</div>
+</div>
 
-    <div class="cv-modal" id="cvModal">
-        <div class="cv-modal-content">
-            <div class="cv-modal-header">
-                <h3>My CV</h3>
-                <button class="close-cv" id="closeCV">×</button>
-            </div>
-            <div class="cv-modal-body">
-                <iframe class="cv-iframe" src="Hamza Saleh 19-6.pdf" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
+<div class="certificate-card" data-cert="sql">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/University_of_California%2C_Davis_seal.svg/1200px-University_of_California%2C_Davis_seal.svg.png" alt="SQL for Data Science">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">SQL for Data Science</h3>
+<p class="certificate-issuer">University of California, Davis</p>
+<p class="certificate-date">2023</p>
+</div>
+</div>
 
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+<div class="certificate-card" data-cert="python">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/640px-Python.svg.png" alt="Python for Data Analysis">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">Python for Data Analysis</h3>
+<p class="certificate-issuer">University of Michigan</p>
+<p class="certificate-date">2023</p>
+</div>
+</div>
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+<div class="certificate-card" data-cert="excel">
+<div class="certificate-image">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg/640px-Microsoft_Office_Excel_%282019%E2%80%93present%29.svg.png" alt="Advanced Excel">
+</div>
+<div class="certificate-content">
+<h3 class="certificate-title">Advanced Excel for Data Analysis</h3>
+<p class="certificate-issuer">Microsoft</p>
+<p class="certificate-date">2023</p>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
+<section class="section education" id="education">
+<div class="container">
+<h2 class="section-title scroll-reveal">Education</h2>
+<div class="education-grid">
+<div class="education-card scroll-reveal">
+<h3 class="degree">Bachelor's degree in Civil Engineering</h3>
+<p class="institution">Al-Balqa' Applied University / Faculty of engineering technology</p>
+<p class="edu-duration">2014 – 2018 | Amman, Jordan</p>
+<span class="gpa">Grade: 3.1 (Very Good)</span>
+</div>
+<div class="education-card scroll-reveal">
+<h3 class="degree">Tawjihi (High School Diploma)</h3>
+<p class="institution">Scientific Stream</p>
+<p class="edu-duration">2013 – 2014 | Amman, Jordan</p>
+<span class="gpa">Grade: 92/100 (Excellent)</span>
+</div>
+</div>
+</div>
+</section>
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
+<section class="section cv-section" id="cv">
+<div class="container">
+<h2 class="section-title scroll-reveal">My CV</h2>
+<div class="cv-container scroll-reveal">
+<p>Download my CV to view my complete professional background and qualifications.</p>
+<div class="cv-buttons">
+<a href="your-cv.pdf" download class="cv-button">
+<i class="fas fa-download"></i> Download CV
+</a>
+<a href="#" class="cv-button secondary" id="viewCV">
+<i class="fas fa-eye"></i> Preview CV
+</a>
+</div>
+</div>
+</div>
+</section>
 
-        // Create chart grid lines
-        const chartGrid = document.getElementById('chartGrid');
-        const chartContent = document.getElementById('chartContent');
-        
-        // Create horizontal grid lines
-        for (let i = 0; i <= 5; i++) {
-            const line = document.createElement('div');
-            line.className = 'grid-line horizontal-line';
-            line.style.top = `${i * 20}%`;
-            chartGrid.appendChild(line);
-            
-            // Add Y-axis labels
-            const label = document.createElement('div');
-            label.className = 'grid-label';
-            label.style.position = 'absolute';
-            label.style.left = '-30px';
-            label.style.top = `${i * 20}%`;
-            label.style.transform = 'translateY(-50%)';
-            label.style.color = 'rgba(255,255,255,0.7)';
-            label.style.fontSize = '12px';
-            label.textContent = `${100 - i * 20}`;
-            chartGrid.appendChild(label);
-        }
-        
-        // Create vertical grid lines
-        for (let i = 0; i <= 8; i++) {
-            const line = document.createElement('div');
-            line.className = 'grid-line vertical-line';
-            line.style.left = `${i * (100/8)}%`;
-            chartGrid.appendChild(line);
-        }
+<div class="overlay" id="overlay"></div>
+<div class="project-preview" id="projectPreview">
+<div class="preview-header">
+<h3 id="previewTitle">Project Preview</h3>
+<button class="close-preview" id="closePreview">×</button>
+</div>
+<div class="preview-content">
+<iframe class="preview-iframe" id="previewIframe" frameborder="0"></iframe>
+</div>
+</div>
 
-        // Create animated chart bars - adjusted for mobile
-        const barHeights = [70, 50, 80, 60, 90, 40, 75, 55];
-        const barPositions = [10, 20, 30, 40, 50, 60, 70, 80];
-        
-        barHeights.forEach((height, index) => {
-            const bar = document.createElement('div');
-            bar.className = 'chart-bar';
-            bar.style.left = `${barPositions[index]}%`;
-            bar.style.height = `${height}%`;
-            bar.style.animationDelay = `${index * 0.1}s`;
-            chartContent.appendChild(bar);
-        });
-        
-        // Create trend line
-        const trendLine = document.createElement('div');
-        trendLine.className = 'trend-line';
-        trendLine.style.left = '10%';
-        trendLine.style.top = '30%';
-        trendLine.style.width = '70%';
-        trendLine.style.transform = 'rotate(-5deg)';
-        trendLine.style.transformOrigin = 'left center';
-        chartContent.appendChild(trendLine);
+<div class="certificate-modal" id="certificateModal">
+<div class="certificate-modal-content">
+<button class="close-certificate" id="closeCertificate">×</button>
+<img src="" alt="Certificate" class="certificate-modal-img" id="certificateModalImg">
+</div>
+</div>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+<div class="cv-modal" id="cvModal">
+<div class="cv-modal-content">
+<div class="cv-modal-header">
+<h3>My CV</h3>
+<button class="close-cv" id="closeCV">×</button>
+</div>
+<div class="cv-modal-body">
+<iframe class="cv-iframe" src="your-cv.pdf" frameborder="0"></iframe>
+</div>
+</div>
+</div>
 
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+const navbar = document.getElementById('navbar');
+if (window.scrollY > 50) {
+navbar.classList.add('scrolled');
+} else {
+navbar.classList.remove('scrolled');
+}
+});
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
+// Mobile menu toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
 
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
-        });
+mobileMenuBtn.addEventListener('click', () => {
+mobileMenu.classList.toggle('active');
+});
 
-        // Project preview functionality
-        const projectCards = document.querySelectorAll('.project-card');
-        const overlay = document.getElementById('overlay');
-        const projectPreview = document.getElementById('projectPreview');
-        const closePreview = document.getElementById('closePreview');
-        const previewTitle = document.getElementById('previewTitle');
-        const previewDetails = document.getElementById('previewDetails');
-        const previewVisual = document.getElementById('previewVisual');
+// Close mobile menu when clicking a link
+document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+link.addEventListener('click', () => {
+mobileMenu.classList.remove('active');
+});
+});
 
-        const projectData = {
-            ecommerce: {
-                title: 'E-Commerce Sales & Churn Analysis',
-                content: `
-                    <h3>Project Overview</h3>
-                    <p>Developed a comprehensive Power BI dashboard to analyze e-commerce sales performance and customer churn patterns.</p>
-                    
-                    <h3>Key Features</h3>
-                    <ul>
-                        <li>Five interactive pages for segmentation, sales, churn, returns, and insights</li>
-                        <li>Applied RFM segmentation to categorize customers</li>
-                        <li>Time-series forecasting for sales trends</li>
-                        <li>Churn modeling to predict customer retention</li>
-                        <li>Utilized DAX measures and custom date tables</li>
-                        <li>Implemented star schema for optimized analysis</li>
-                    </ul>
-                    
-                    <h3>Technologies Used</h3>
-                    <p>Power BI, Power Query, DAX, RFM Analysis, Time-Series Forecasting</p>
-                    
-                    <h3>Key Insights</h3>
-                    <ul>
-                        <li>2020 had the most transactions (50,339)</li>
-                        <li>Crypto payments declined in 2023</li>
-                        <li>February saw peak churn (18.24%)</li>
-                        <li>High-churn group (20.94%) spends and shops the least</li>
-                        <li>Champions are the most loyal customers</li>
-                        <li>Clothing + Credit Card led revenue ($39M)</li>
-                        <li>Returns peaked at 42.59% for credit card users</li>
-                    </ul>
-                `,
-                visual: '<iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjU5YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0" frameborder="0" allowFullScreen="true"></iframe>'
-            },
-            superstore: {
-                title: 'Superstore Sales & Profitability Analysis',
-                content: `
-                    <h3>Project Overview</h3>
-                    <p>Analyzed profitability by category, discount impacts, customer segments, and shipping modes in a superstore dataset.</p>
-                    
-                    <h3>Key Features</h3>
-                    <ul>
-                        <li>Profitability analysis by product category</li>
-                        <li>Impact assessment of discounts on sales</li>
-                        <li>Customer segmentation analysis</li>
-                        <li>Shipping mode performance evaluation</li>
-                        <li>KPI cards and trend lines for visualization</li>
-                        <li>Cross-filtering for interactive insights</li>
-                        <li>Customer Lifetime Value (CLTV) estimation</li>
-                    </ul>
-                    
-                    <h3>Technologies Used</h3>
-                    <p>Power BI, Power Query, DAX, Customer Lifetime Value Analysis</p>
-                    
-                    <h3>Key Insights</h3>
-                    <ul>
-                        <li>Identified most profitable product categories</li>
-                        <li>Analyzed optimal discount levels</li>
-                        <li>Segmented customers by profitability</li>
-                        <li>Evaluated shipping mode efficiency</li>
-                        <li>Estimated CLTV by segment and region</li>
-                    </ul>
-                `,
-                visual: '<iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjU5YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0YzY2Y2YtY2Q0Yi00YzY0LThjYjMtYjY0" frameborder="0" allowFullScreen="true"></iframe>'
-            },
-            electronics: {
-                title: 'Electronic Market Sales Analysis',
-                content: `
-                    <h3>Project Overview</h3>
-                    <p>Python-based analysis of electronic market sales data to identify trends and optimize business decisions.</p>
-                    
-                    <h3>Key Features</h3>
-                    <ul>
-                        <li>Data integration and cleansing with Pandas</li>
-                        <li>Resolution of missing values and date inconsistencies</li>
-                        <li>Engineered new data fields for enhanced analysis</li>
-                        <li>Sales trend analysis by month, city, and hour</li>
-                        <li>Visualization with Matplotlib</li>
-                    </ul>
-                    
-                    <h3>Technologies Used</h3>
-                    <p>Python, Pandas, NumPy, SciPy, Matplotlib</p>
-                    
-                    <h3>Key Insights</h3>
-                    <ul>
-                        <li>December recorded the highest sales ($4.61M)</li>
-                        <li>San Francisco led sales at $8.26M</li>
-                        <li>Peak purchasing hours between 11 AM – 7 PM</li>
-                        <li>Optimal ad timing recommendations</li>
-                        <li>City-specific sales patterns identified</li>
-                    </ul>
-                `,
-                visual: '<iframe src="https://nbviewer.org/github/hamzasaleh1/electronics-sales-analysis/blob/main/analysis.ipynb" frameborder="0" allowFullScreen="true"></iframe>'
-            }
-        };
+// Create chart grid lines
+const chartGrid = document.getElementById('chartGrid');
+const chartContent = document.getElementById('chartContent');
 
-        projectCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const projectId = card.dataset.project;
-                const project = projectData[projectId];
-                
-                if (project) {
-                    previewTitle.textContent = project.title;
-                    previewDetails.innerHTML = project.content;
-                    previewVisual.innerHTML = project.visual;
-                    
-                    overlay.classList.add('active');
-                    projectPreview.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-        });
+// Create horizontal grid lines
+for (let i = 0; i <= 5; i++) {
+const line = document.createElement('div');
+line.className = 'grid-line horizontal-line';
+line.style.top = `${i * 20}%`;
+chartGrid.appendChild(line);
 
-        // Close preview
-        function closeProjectPreview() {
-            overlay.classList.remove('active');
-            projectPreview.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+// Add Y-axis labels
+const label = document.createElement('div');
+label.className = 'grid-label';
+label.style.position = 'absolute';
+label.style.left = '-30px';
+label.style.top = `${i * 20}%`;
+label.style.transform = 'translateY(-50%)';
+label.style.color = 'rgba(255,255,255,0.7)';
+label.style.fontSize = '12px';
+label.textContent = `${100 - i * 20}`;
+chartGrid.appendChild(label);
+}
 
-        closePreview.addEventListener('click', closeProjectPreview);
-        overlay.addEventListener('click', closeProjectPreview);
+// Create vertical grid lines
+for (let i = 0; i <= 8; i++) {
+const line = document.createElement('div');
+line.className = 'grid-line vertical-line';
+line.style.left = `${i * (100/8)}%`;
+chartGrid.appendChild(line);
+}
 
-        // Certificate modal functionality
-        const certificateCards = document.querySelectorAll('.certificate-card');
-        const certificateModal = document.getElementById('certificateModal');
-        const closeCertificate = document.getElementById('closeCertificate');
-        const certificateModalImg = document.getElementById('certificateModalImg');
+// Create animated chart bars - adjusted for mobile
+const barHeights = [70, 50, 80, 60, 90, 40, 75, 55];
+const barPositions = [10, 20, 30, 40, 50, 60, 70, 80];
 
-        certificateCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const imgSrc = card.querySelector('img').src;
-                certificateModalImg.src = imgSrc;
-                certificateModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
+barHeights.forEach((height, index) => {
+const bar = document.createElement('div');
+bar.className = 'chart-bar';
+bar.style.left = `${barPositions[index]}%`;
+bar.style.height = `${height}%`;
+bar.style.animationDelay = `${index * 0.1}s`;
+chartContent.appendChild(bar);
+});
 
-        function closeCertificateModal() {
-            certificateModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+// Create trend line
+const trendLine = document.createElement('div');
+trendLine.className = 'trend-line';
+trendLine.style.left = '10%';
+trendLine.style.top = '30%';
+trendLine.style.width = '70%';
+trendLine.style.transform = 'rotate(-5deg)';
+trendLine.style.transformOrigin = 'left center';
+chartContent.appendChild(trendLine);
 
-        closeCertificate.addEventListener('click', closeCertificateModal);
-        certificateModal.addEventListener('click', (e) => {
-            if (e.target === certificateModal) {
-                closeCertificateModal();
-            }
-        });
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
 
-        // CV Modal functionality
-        const showCV = document.getElementById('showCV');
-        const showCVMobile = document.getElementById('showCVMobile');
-        const cvModal = document.getElementById('cvModal');
-        const closeCV = document.getElementById('closeCV');
+// Scroll reveal animation
+const observerOptions = {
+threshold: 0.1,
+rootMargin: '0px 0px -50px 0px'
+};
 
-        function openCVModal() {
-            cvModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('revealed');
+}
+});
+}, observerOptions);
 
-        function closeCVModal() {
-            cvModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+document.querySelectorAll('.scroll-reveal').forEach(el => {
+observer.observe(el);
+});
 
-        showCV.addEventListener('click', (e) => {
-            e.preventDefault();
-            openCVModal();
-        });
+// Project preview functionality
+const projectButtons = document.querySelectorAll('.view-project');
+const overlay = document.getElementById('overlay');
+const projectPreview = document.getElementById('projectPreview');
+const closePreview = document.getElementById('closePreview');
+const previewTitle = document.getElementById('previewTitle');
+const previewIframe = document.getElementById('previewIframe');
 
-        showCVMobile.addEventListener('click', (e) => {
-            e.preventDefault();
-            openCVModal();
-        });
+const projectData = {
+accidents: {
+title: 'Car Accidents of Addis Ababa City (2017-2020)',
+url: 'https://public.tableau.com/views/caraccidents_17400745330480/Story1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link'
+},
+ecommerce: {
+title: 'E-Commerce Sales & Churn Analysis',
+url: 'https://app.powerbi.com/view?r=eyJrIjoiY2JmNjdkMDctYzY5YS00NTc2LWFjYWEtNDFhMzljMzNmYjJlIiwidCI6IjlkOWNjZGZmLWYyN2YtNGI1NC05YzAyLTg5NWZhZjc3OWVkMCIsImMiOjl9'
+},
+electronics: {
+title: 'Electronic Market Sales Analysis',
+url: 'https://nbviewer.org/github/hamzasaleh1/Electronic-market-sales/blob/main/All%20Data.ipynb'
+},
+superstore: {
+title: 'Superstore Sales & Profitability Analysis',
+url: 'https://app.powerbi.com/view?r=eyJrIjoiY2JmNjdkMDctYzY5YS00NTc2LWFjYWEtNDFhMzljMzNmYjJlIiwidCI6IjlkOWNjZGZmLWYyN2YtNGI1NC05YzAyLTg5NWZhZjc3OWVkMCIsImMiOjl9'
+}
+};
 
-        closeCV.addEventListener('click', closeCVModal);
-        cvModal.addEventListener('click', (e) => {
-            if (e.target === cvModal) {
-                closeCVModal();
-            }
-        });
+projectButtons.forEach((button, index) => {
+button.addEventListener('click', (e) => {
+e.preventDefault();
+const projectCard = button.closest('.project-card');
+const projectId = projectCard.dataset.project;
+const project = projectData[projectId];
 
-        // Add typing effect to hero text
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            
-            type();
-        }
+if (project) {
+previewTitle.textContent = project.title;
+previewIframe.src = project.url;
 
-        // Initialize typing effect when page loads
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const heroTitle = document.querySelector('.hero h1');
-                typeWriter(heroTitle, 'Hamza Saleh', 150);
-            }, 1000);
-        });
+overlay.classList.add('active');
+projectPreview.classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+});
+});
 
-        // Add mouse movement effect to project cards
-        projectCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-            });
-        });
+// Close preview
+function closeProjectPreview() {
+overlay.classList.remove('active');
+projectPreview.classList.remove('active');
+previewIframe.src = '';
+document.body.style.overflow = '';
+}
 
-        // Add keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (projectPreview.classList.contains('active')) {
-                    closeProjectPreview();
-                }
-                if (certificateModal.classList.contains('active')) {
-                    closeCertificateModal();
-                }
-                if (cvModal.classList.contains('active')) {
-                    closeCVModal();
-                }
-            }
-        });
+closePreview.addEventListener('click', closeProjectPreview);
+overlay.addEventListener('click', closeProjectPreview);
 
-        // Add loading animation
-        window.addEventListener('load', () => {
-            const loader = document.createElement('div');
-            loader.innerHTML = `
-                <div class="loader">
-                    <div class="loader-spinner"></div>
-                    <p>Loading Portfolio...</p>
-                </div>
-            `;
-            loader.className = 'page-loader';
-            document.body.appendChild(loader);
-            
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.remove();
-                }, 500);
-            }, 2000);
-        });
+// Certificate modal functionality
+const certificateCards = document.querySelectorAll('.certificate-card');
+const certificateModal = document.getElementById('certificateModal');
+const closeCertificate = document.getElementById('closeCertificate');
+const certificateModalImg = document.getElementById('certificateModalImg');
 
-        // Add progress bar for page scroll
-        const progressBar = document.createElement('div');
-        progressBar.className = 'scroll-progress';
-        document.body.appendChild(progressBar);
+certificateCards.forEach(card => {
+card.addEventListener('click', () => {
+const imgSrc = card.querySelector('img').src;
+certificateModalImg.src = imgSrc;
+certificateModal.classList.add('active');
+document.body.style.overflow = 'hidden';
+});
+});
 
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.offsetHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            progressBar.style.width = scrollPercent + '%';
-        });
-    </script>
+function closeCertificateModal() {
+certificateModal.classList.remove('active');
+document.body.style.overflow = '';
+}
+
+closeCertificate.addEventListener('click', closeCertificateModal);
+certificateModal.addEventListener('click', (e) => {
+if (e.target === certificateModal) {
+closeCertificateModal();
+}
+});
+
+// CV Modal functionality
+const viewCV = document.getElementById('viewCV');
+const cvModal = document.getElementById('cvModal');
+const closeCV = document.getElementById('closeCV');
+
+function openCVModal() {
+cvModal.classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+
+function closeCVModal() {
+cvModal.classList.remove('active');
+document.body.style.overflow = '';
+}
+
+viewCV.addEventListener('click', (e) => {
+e.preventDefault();
+openCVModal();
+});
+
+closeCV.addEventListener('click', closeCVModal);
+cvModal.addEventListener('click', (e) => {
+if (e.target === cvModal) {
+closeCVModal();
+}
+});
+
+// Add typing effect to hero text
+function typeWriter(element, text, speed = 100) {
+let i = 0;
+element.innerHTML = '';
+
+function type() {
+if (i < text.length) {
+element.innerHTML += text.charAt(i);
+i++;
+setTimeout(type, speed);
+}
+}
+
+type();
+}
+
+// Initialize typing effect when page loads
+window.addEventListener('load', () => {
+setTimeout(() => {
+const heroTitle = document.querySelector('.hero h1');
+typeWriter(heroTitle, 'Hamza Saleh', 150);
+}, 1000);
+});
+
+// Add mouse movement effect to project cards
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(card => {
+card.addEventListener('mousemove', (e) => {
+const rect = card.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+
+const centerX = rect.width / 2;
+const centerY = rect.height / 2;
+
+const rotateX = (y - centerY) / 10;
+const rotateY = (centerX - x) / 10;
+
+card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+});
+
+card.addEventListener('mouseleave', () => {
+card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+});
+});
+
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') {
+if (projectPreview.classList.contains('active')) {
+closeProjectPreview();
+}
+if (certificateModal.classList.contains('active')) {
+closeCertificateModal();
+}
+if (cvModal.classList.contains('active')) {
+closeCVModal();
+}
+}
+});
+
+// Add loading animation
+window.addEventListener('load', () => {
+const loader = document.createElement('div');
+loader.innerHTML = `
+<div class="loader">
+<div class="loader-spinner"></div>
+<p>Loading Portfolio...</p>
+</div>
+`;
+loader.className = 'page-loader';
+document.body.appendChild(loader);
+
+setTimeout(() => {
+loader.style.opacity = '0';
+setTimeout(() => {
+loader.remove();
+}, 500);
+}, 2000);
+});
+
+// Add progress bar for page scroll
+const progressBar = document.createElement('div');
+progressBar.className = 'scroll-progress';a
+document.body.appendChild(progressBar);
+
+window.addEventListener('scroll', () => {
+const scrollTop = window.pageYOffset;
+const docHeight = document.body.offsetHeight - window.innerHeight;
+const scrollPercent = (scrollTop / docHeight) * 100;
+progressBar.style.width = scrollPercent + '%';
+});
+</script>
 </body>
 </html>
